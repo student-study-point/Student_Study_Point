@@ -30,7 +30,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, .85);
-            display: none; /* Initially hidden, JS will decide */
+            display: none; 
             justify-content: center;
             align-items: center;
             z-index: 9999;
@@ -328,11 +328,9 @@
     const hindiNames = ["1. बातचीत", "2. उसने कहा था", "3. संपूर्ण क्रांति", "4. अर्धनारीश्वर", "5. रोज", "6. एक लेख और एक पत्र", "7. ओ सदानीरा", "8. सिपाही की माँ", "9. प्रगीत और समाज", "10. जूठन", "11. हंसते हुए मेरा अकेलापन", "12. तिरिछ", "13. शिक्षा", "14. कड़बक", "15. पद (सूरदास)", "16. पद (Tulsidas)", "17. छप्पय", "18. कवित्त", "19. तुमुल कोलाहल कलह में", "20. पुत्र वियोग", "21. उषा", "22. जन-जन का चेहरा एक", "23. अधिनायक", "24. प्यारे नन्हे बेटे को", "25. हार-जीत", "26. गाँव का घर"];
     const links = ["Chapter_1_-/", "Chapter_2_-/", "Chapter_3_-/", "Chapter_4_-/", "Chapter_5_-/", "Chapter_6_-/", "Chapter_7_-/", "Chapter_8_-/", "Chapter_9_-/", "Chapter_10_-/", "Chapter_11/", "Chapter_12_-/", "Chapter_13/", "Chapter_14/", "Chapter_15/", "Chapter_16/", "Chapter_17/", "Chapter_18/", "Chapter_19/", "Chapter_20/", "Chapter_21/", "Chapter_22/", "Chapter_23/", "Chapter_24/", "Chapter_25/", "Chapter_26/"];
 
-    // Check if user already exists on page load
     window.onload = function() {
         const savedName = localStorage.getItem("adityaUserName");
         const savedClass = localStorage.getItem("adityaUserClass");
-
         if (savedName && savedClass) {
             showDashboard(savedName);
         } else {
@@ -340,15 +338,20 @@
         }
     }
 
+    // Phone back button logic
+    window.addEventListener('popstate', function() {
+        const modal = document.getElementById("modal");
+        if (modal.style.display === "block") {
+            modal.style.display = "none";
+        }
+    });
+
     function accessSite() {
         const name = document.getElementById("name").value;
         const uClass = document.getElementById("userClass").value;
-
         if (name && uClass) {
-            // Save to localStorage
             localStorage.setItem("adityaUserName", name);
             localStorage.setItem("adityaUserClass", uClass);
-            
             showDashboard(name);
         } else {
             alert("Kripya apna Naam aur Class bhariye");
@@ -361,8 +364,21 @@
         document.getElementById("userBadge").innerText = name;
     }
 
+    function openModalLogic() {
+        document.getElementById("modal").style.display = "block";
+        // Push a state so back button works for modal
+        history.pushState({modalOpen: true}, "");
+    }
+
     function closeModal() {
-        document.getElementById("modal").style.display = "none";
+        const modal = document.getElementById("modal");
+        if(modal.style.display === "block") {
+            modal.style.display = "none";
+            // If user clicked close button, we need to go back in history to clear the state
+            if(history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
     }
 
     function openSection(e) {
@@ -372,7 +388,7 @@
                  <div class="subject-link">Important Subjective <span>→</span></div>
                  <div class="subject-link">Model Set Practice <span>→</span></div>`;
         document.getElementById("modalContent").innerHTML = t;
-        document.getElementById("modal").style.display = "block";
+        openModalLogic();
     }
 
     function openHindi() {
@@ -382,7 +398,7 @@
             e += `<div class="subject-link" onclick="window.open('https://adityaanshamm-wq.github.io/Class_12th_Hindi_${links[n]}')">${t} <span style="font-size:11px;color:var(--primary)">READ ➔</span></div>`
         });
         document.getElementById("modalContent").innerHTML = e;
-        document.getElementById("modal").style.display = "block";
+        openModalLogic();
     }
 
     function openModelPaper() {
@@ -395,7 +411,6 @@
             <div class="subject-link">Hindi <span>→</span></div>
             <div class="subject-link">Sanskrit <span>→</span></div>
             <div class="subject-link">English <span>→</span></div>
-            
             <div class="section-title">12th SCIENCE</div>
             <div class="subject-link">Physics <span>→</span></div>
             <div class="subject-link">Chemistry <span>→</span></div>
@@ -403,7 +418,6 @@
             <div class="subject-link">Mathematics <span>→</span></div>
             <div class="subject-link">Hindi <span>→</span></div>
             <div class="subject-link">English <span>→</span></div>
-
             <div class="section-title">12th ARTS</div>
             <div class="subject-link">History <span>→</span></div>
             <div class="subject-link">Geography <span>→</span></div>
@@ -411,7 +425,6 @@
             <div class="subject-link">Psychology <span>→</span></div>
             <div class="subject-link">Hindi <span>→</span></div>
             <div class="subject-link">English <span>→</span></div>
-
             <div class="section-title">12th COMMERCE</div>
             <div class="subject-link">Accountancy <span>→</span></div>
             <div class="subject-link">Business Studies <span>→</span></div>
@@ -421,7 +434,7 @@
             <div class="subject-link">English <span>→</span></div>
         `;
         document.getElementById("modalContent").innerHTML = html;
-        document.getElementById("modal").style.display = "block";
+        openModalLogic();
     }
 
     function openPYQ() {
@@ -434,7 +447,6 @@
             <div class="subject-link">Hindi <span>→</span></div>
             <div class="subject-link">Sanskrit <span>→</span></div>
             <div class="subject-link">English <span>→</span></div>
-            
             <div class="section-title">12th SCIENCE</div>
             <div class="subject-link">Physics <span>→</span></div>
             <div class="subject-link">Chemistry <span>→</span></div>
@@ -442,7 +454,6 @@
             <div class="subject-link">Mathematics <span>→</span></div>
             <div class="subject-link">Hindi <span>→</span></div>
             <div class="subject-link">English <span>→</span></div>
-
             <div class="section-title">12th ARTS</div>
             <div class="subject-link">History <span>→</span></div>
             <div class="subject-link">Geography <span>→</span></div>
@@ -450,7 +461,6 @@
             <div class="subject-link">Psychology <span>→</span></div>
             <div class="subject-link">Hindi <span>→</span></div>
             <div class="subject-link">English <span>→</span></div>
-
             <div class="section-title">12th COMMERCE</div>
             <div class="subject-link">Accountancy <span>→</span></div>
             <div class="subject-link">Business Studies <span>→</span></div>
@@ -460,8 +470,9 @@
             <div class="subject-link">English <span>→</span></div>
         `;
         document.getElementById("modalContent").innerHTML = html;
-        document.getElementById("modal").style.display = "block";
+        openModalLogic();
     }
 </script>
 </body>
 </html>
+
