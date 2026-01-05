@@ -30,7 +30,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, .85);
-            display: flex;
+            display: none; /* Initially hidden, JS will decide */
             justify-content: center;
             align-items: center;
             z-index: 9999;
@@ -328,14 +328,37 @@
     const hindiNames = ["1. बातचीत", "2. उसने कहा था", "3. संपूर्ण क्रांति", "4. अर्धनारीश्वर", "5. रोज", "6. एक लेख और एक पत्र", "7. ओ सदानीरा", "8. सिपाही की माँ", "9. प्रगीत और समाज", "10. जूठन", "11. हंसते हुए मेरा अकेलापन", "12. तिरिछ", "13. शिक्षा", "14. कड़बक", "15. पद (सूरदास)", "16. पद (Tulsidas)", "17. छप्पय", "18. कवित्त", "19. तुमुल कोलाहल कलह में", "20. पुत्र वियोग", "21. उषा", "22. जन-जन का चेहरा एक", "23. अधिनायक", "24. प्यारे नन्हे बेटे को", "25. हार-जीत", "26. गाँव का घर"];
     const links = ["Chapter_1_-/", "Chapter_2_-/", "Chapter_3_-/", "Chapter_4_-/", "Chapter_5_-/", "Chapter_6_-/", "Chapter_7_-/", "Chapter_8_-/", "Chapter_9_-/", "Chapter_10_-/", "Chapter_11/", "Chapter_12_-/", "Chapter_13/", "Chapter_14/", "Chapter_15/", "Chapter_16/", "Chapter_17/", "Chapter_18/", "Chapter_19/", "Chapter_20/", "Chapter_21/", "Chapter_22/", "Chapter_23/", "Chapter_24/", "Chapter_25/", "Chapter_26/"];
 
+    // Check if user already exists on page load
+    window.onload = function() {
+        const savedName = localStorage.getItem("adityaUserName");
+        const savedClass = localStorage.getItem("adityaUserClass");
+
+        if (savedName && savedClass) {
+            showDashboard(savedName);
+        } else {
+            document.getElementById("signup-overlay").style.display = "flex";
+        }
+    }
+
     function accessSite() {
-        const e = document.getElementById("name").value,
-            t = document.getElementById("userClass").value;
-        if (e && t) {
-            document.getElementById("signup-overlay").style.display = "none";
-            document.getElementById("mainBody").style.display = "block";
-            document.getElementById("userBadge").innerText = e;
-        } else alert("Details bhariye");
+        const name = document.getElementById("name").value;
+        const uClass = document.getElementById("userClass").value;
+
+        if (name && uClass) {
+            // Save to localStorage
+            localStorage.setItem("adityaUserName", name);
+            localStorage.setItem("adityaUserClass", uClass);
+            
+            showDashboard(name);
+        } else {
+            alert("Kripya apna Naam aur Class bhariye");
+        }
+    }
+
+    function showDashboard(name) {
+        document.getElementById("signup-overlay").style.display = "none";
+        document.getElementById("mainBody").style.display = "block";
+        document.getElementById("userBadge").innerText = name;
     }
 
     function closeModal() {
@@ -442,4 +465,3 @@
 </script>
 </body>
 </html>
-
