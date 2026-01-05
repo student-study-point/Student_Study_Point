@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Aditya Study | Professional Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -23,11 +23,13 @@
             color: #1e293b;
         }
 
-        /* SIGNUP OVERLAY */
         #signup-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .85);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,50 +37,74 @@
         }
 
         .signup-box {
-            background: white;
+            background: #fff;
             padding: 40px;
             border-radius: 20px;
             width: 90%;
             max-width: 380px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
         }
 
-        .signup-box h2 { color: var(--primary); margin-bottom: 20px; font-weight: 700; }
-        
+        .signup-box h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
         input, select {
-            width: 100%; padding: 15px; margin: 10px 0;
-            border: 1px solid #e2e8f0; border-radius: 12px;
-            box-sizing: border-box; font-size: 16px; outline: none;
-            background: white;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: 0;
+            background: #fff;
         }
 
         .btn-start {
-            background: var(--primary); color: white; border: none;
-            width: 100%; padding: 15px; border-radius: 12px;
-            font-weight: 700; cursor: pointer; font-size: 18px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 18px;
             margin-top: 15px;
         }
 
-        /* COMPACT PREMIUM HEADER */
         nav {
-            background: white;
+            background: #fff;
             height: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 6%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
             position: sticky;
-            top: 0; z-index: 1000;
+            top: 0;
+            z-index: 1000;
         }
 
-        .logo-section { display: flex; align-items: center; gap: 8px; }
-        .book-icon { font-size: 24px; }
-        .brand { font-size: 20px; font-weight: 700; color: var(--primary); }
-        .user-badge { background: #f1f5f9; padding: 5px 15px; border-radius: 50px; font-size: 13px; font-weight: 600; color: #475569;}
+        .brand {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
-        /* MAIN CONTENT */
+        .user-badge {
+            background: #f1f5f9;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+        }
+
         .container {
             max-width: 1100px;
             margin: 30px auto;
@@ -90,11 +116,10 @@
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             border-radius: 20px;
             padding: 30px;
-            color: white;
+            color: #fff;
             margin-bottom: 20px;
         }
 
-        /* QUICK LINKS */
         .quick-links {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -103,7 +128,7 @@
         }
 
         .q-link-card {
-            background: white;
+            background: #fff;
             padding: 15px;
             border-radius: 15px;
             text-align: center;
@@ -111,10 +136,7 @@
             font-weight: 700;
             border: 1px solid #e2e8f0;
             cursor: pointer;
-            transition: 0.3s;
         }
-
-        .q-link-card:hover { background: var(--primary); color: white; }
 
         .grid {
             display: grid;
@@ -123,14 +145,20 @@
         }
 
         .stream-card {
-            background: white;
+            background: #fff;
             border-radius: 16px;
             padding: 20px;
             border: 1px solid #edf2f7;
-            transition: 0.3s ease;
         }
 
-        .card-h { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .card-h {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
         .subject-link {
             display: flex;
@@ -145,12 +173,47 @@
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
-            transition: 0.2s;
         }
 
-        .subject-link:hover { background: #eff6ff; color: var(--primary); }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 10000;
+            overflow-y: auto;
+        }
 
-        /* SOCIAL SECTION */
+        .modal-inner {
+            background: #fff;
+            width: 100%;
+            height: 100%;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .section-title {
+            background: #f1f5f9;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 15px 0 10px 0;
+            color: #475569;
+        }
+
+        .objective-btn {
+            background: var(--primary) !important;
+            color: #fff !important;
+            text-align: center !important;
+            justify-content: center !important;
+            font-size: 16px !important;
+            margin-bottom: 20px !important;
+        }
+
         .social-grid {
             margin-top: 40px;
             display: grid;
@@ -164,224 +227,219 @@
             border-radius: 15px;
             text-align: center;
             font-weight: 700;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
+            color: #fff;
             text-decoration: none;
-            display: block;
-        }
-
-        .wa-btn { background: var(--whatsapp); }
-        .tg-btn { background: var(--telegram); }
-
-        .social-card:hover { transform: translateY(-5px); opacity: 0.9; }
-
-        /* MODALS */
-        .modal {
-            display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-            background:rgba(0,0,0,0.7); z-index:10000; backdrop-filter: blur(4px);
-        }
-        .modal-inner {
-            background:white; width:90%; max-width:550px; margin:40px auto;
-            border-radius:20px; padding:25px; height:80vh; overflow-y:auto;
-        }
-        .section-title {
-            background: #f1f5f9;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            margin: 15px 0 10px 0;
-            color: #475569;
-        }
-        
-        .objective-btn {
-            background: #2563eb !important;
-            color: white !important;
-            text-align: center !important;
-            justify-content: center !important;
-            font-size: 16px !important;
-            margin-bottom: 20px !important;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
     </style>
 </head>
 <body>
 
-    <div id="signup-overlay">
-        <div class="signup-box">
-            <h2>Aditya Study 📖</h2>
-            <input type="text" id="name" placeholder="Enter Your Name">
-            <select id="userClass">
-                <option value="" disabled selected>Select Your Class</option>
-                <option value="10th">Class 10th (Matric)</option>
-                <option value="12th Science">Class 12th (Science)</option>
-                <option value="12th Arts">Class 12th (Arts)</option>
-                <option value="12th Commerce">Class 12th (Commerce)</option>
-            </select>
-            <button class="btn-start" onclick="accessSite()">Get Started ➔</button>
+<div id="signup-overlay">
+    <div class="signup-box">
+        <h2>Aditya Study 📖</h2>
+        <input type="text" id="name" placeholder="Enter Your Name">
+        <select id="userClass">
+            <option value="" disabled selected>Select Your Class</option>
+            <option value="10th">Class 10th (Matric)</option>
+            <option value="12th Science">Class 12th (Science)</option>
+            <option value="12th Arts">Class 12th (Arts)</option>
+            <option value="12th Commerce">Class 12th (Commerce)</option>
+        </select>
+        <button class="btn-start" onclick="accessSite()">Get Started ➔</button>
+    </div>
+</div>
+
+<nav>
+    <div class="brand">📖 Aditya Study</div>
+    <div class="user-badge">Hi, <span id="userBadge">Guest</span> 👋</div>
+</nav>
+
+<div class="container" id="mainBody">
+    <div class="welcome-banner">
+        <h1 style="margin:0;font-size:24px">Welcome Back! 👋</h1>
+        <p style="margin:5px 0 0;opacity:.9">Bihar Board Exam Special Dashboard</p>
+    </div>
+
+    <div class="quick-links">
+        <div class="q-link-card" onclick="openModelPaper()">📄 Model Papers 2026</div>
+        <div class="q-link-card" onclick="openPYQ()">⏳ PYQ (Previous Year)</div>
+    </div>
+
+    <div class="grid">
+        <div class="stream-card" style="border-top:4px solid #64748b">
+            <div class="card-h">📘 Class 10th</div>
+            <div class="subject-link" onclick="openSection('Mathematics')">Mathematics <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Science')">Science <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Social Science')">Social Science <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Hindi')">Hindi <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Sanskrit')">Sanskrit <span>→</span></div>
+            <div class="subject-link" onclick="openSection('English')">English <span>→</span></div>
+        </div>
+
+        <div class="stream-card" style="border-top:4px solid var(--science)">
+            <div class="card-h" style="color:var(--science)">🧪 12th Science</div>
+            <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
+            <div class="subject-link" onclick="openSection('English (Rainbow)')">English (Rainbow) <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Physics')">Physics <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Chemistry')">Chemistry <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Biology')">Biology <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Mathematics')">Mathematics <span>→</span></div>
+        </div>
+
+        <div class="stream-card" style="border-top:4px solid var(--arts)">
+            <div class="card-h" style="color:var(--arts)">🎨 12th Arts</div>
+            <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
+            <div class="subject-link" onclick="openSection('English (Rainbow)')">English (Rainbow) <span>→</span></div>
+            <div class="subject-link" onclick="openSection('History')">History <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Geography')">Geography <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Political Science')">Political Science <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Psychology')">Psychology <span>→</span></div>
+        </div>
+
+        <div class="stream-card" style="border-top:4px solid var(--commerce)">
+            <div class="card-h" style="color:var(--commerce)">💼 12th Commerce</div>
+            <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
+            <div class="subject-link" onclick="openSection('English (Rainbow)')">English (Rainbow) <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Accountancy')">Accountancy <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Business Studies')">Business Studies <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Economics')">Economics <span>→</span></div>
+            <div class="subject-link" onclick="openSection('Entrepreneurship')">Entrepreneurship <span>→</span></div>
         </div>
     </div>
 
-    <nav>
-        <div class="logo-section">
-            <span class="book-icon">📖</span>
-            <span class="brand">Aditya Study</span>
-        </div>
-        <div class="user-badge">Hi, <span id="userBadge">Guest</span> 👋</div>
-    </nav>
-
-    <div class="container" id="mainBody">
-        <div class="welcome-banner">
-            <h1 style="margin:0; font-size:24px;">Welcome Back! 👋</h1>
-            <p style="margin:5px 0 0; opacity:0.9;">Bihar Board Exam Special Dashboard</p>
-        </div>
-
-        <div class="quick-links">
-            <div class="q-link-card" onclick="openModelPaper()">📄 Model Papers 2026</div>
-            <div class="q-link-card" onclick="openPYQ()">⏳ PYQ (Previous Year)</div>
-        </div>
-
-        <div class="grid">
-            <div class="stream-card" style="border-top: 4px solid #64748b;">
-                <div class="card-h">📘 Class 10th (Matric)</div>
-                <div class="subject-link" onclick="openSection('Mathematics')">Mathematics <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Science')">Science <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Social Science')">Social Science <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Hindi')">Hindi <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Sanskrit')">Sanskrit <span>→</span></div>
-                <div class="subject-link" onclick="openSection('English')">English <span>→</span></div>
-            </div>
-
-            <div class="stream-card" style="border-top: 4px solid var(--science);">
-                <div class="card-h" style="color:var(--science)">🧪 12th Science</div>
-                <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
-                <div class="subject-link" onclick="openSection('English (Rainbow)')">English (Rainbow) <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Physics')">Physics <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Chemistry')">Chemistry <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Mathematics')">Mathematics <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Biology')">Biology <span>→</span></div>
-            </div>
-
-            <div class="stream-card" style="border-top: 4px solid var(--arts);">
-                <div class="card-h" style="color:var(--arts)">🎨 12th Arts</div>
-                <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
-                <div class="subject-link" onclick="openSection('History')">History <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Geography')">Geography <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Political Science')">Political Science <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Psychology')">Psychology <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Home Science')">Home Science <span>→</span></div>
-            </div>
-
-            <div class="stream-card" style="border-top: 4px solid var(--commerce);">
-                <div class="card-h" style="color:var(--commerce)">💼 12th Commerce</div>
-                <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Accountancy')">Accountancy <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Business Studies')">Business Studies <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Economics')">Economics <span>→</span></div>
-                <div class="subject-link" onclick="openSection('Entrepreneurship')">Entrepreneurship <span>→</span></div>
-                <div class="subject-link" onclick="window.open('https://adityaanshamm-wq.github.io/Practice_Set_Paper/')">Practice Papers <span>→</span></div>
-            </div>
-        </div>
-
-        <h3 style="margin-top: 30px; color: #475569;">Connect With Us 🤝</h3>
-        <div class="social-grid">
-            <a href="#" class="social-card wa-btn">WhatsApp Group</a>
-            <a href="#" class="social-card tg-btn">Telegram Group</a>
-        </div>
+    <div class="social-grid">
+        <a href="#" class="social-card" style="background:var(--whatsapp)">WhatsApp Group</a>
+        <a href="#" class="social-card" style="background:var(--telegram)">Telegram Group</a>
     </div>
+</div>
 
-    <div id="modal" class="modal">
-        <div class="modal-inner">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <h3 id="modalTitle" style="margin:0; color:var(--primary);">Modal Title</h3>
-                <button onclick="closeModal()" style="border:none; background:#fee2e2; color:#ef4444; border-radius:8px; padding:5px 12px; cursor:pointer; font-weight:700;">×</button>
-            </div>
-            <hr style="opacity:0.1; margin:15px 0;">
-            <div id="modalContent"></div>
+<div id="modal" class="modal">
+    <div class="modal-inner">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3 id="modalTitle" style="margin:0;color:var(--primary)">Title</h3>
+            <button onclick="closeModal()" style="border:none;background:#fee2e2;color:#ef4444;border-radius:8px;padding:8px 15px;cursor:pointer;font-weight:700">Close ✕</button>
         </div>
+        <hr style="opacity:.1;margin:15px 0">
+        <div id="modalContent"></div>
     </div>
+</div>
 
-    <script>
-        const hindiNames = ["1. बातचीत", "2. उसने कहा था", "3. संपूर्ण क्रांति", "4. अर्धनारीश्वर", "5. रोज", "6. एक लेख और एक पत्र", "7. ओ सदानीरा", "8. सिपाही की माँ", "9. प्रगीत और समाज", "10. जूठन", "11. हंसते हुए मेरा अकेलापन", "12. तिरिछ", "13. शिक्षा", "14. कड़बक", "15. पद (सूरदास)", "16. पद (tulsidas)", "17. छप्पय", "18. कवित्त", "19. तुमुल कोलाहल कलह में", "20. पुत्र वियोग", "21. उषा", "22. जन-जन का चेहरा एक", "23. अधिनायक", "24. प्यारे नन्हे बेटे को", "25. हार-जीत", "26. गाँव का घर"];
-        const links = ["Chapter_1_-/","Chapter_2_-/","Chapter_3_-/","Chapter_4_-/","Chapter_5_-/","Chapter_6_-/","Chapter_7_-/","Chapter_8_-/","Chapter_9_-/","Chapter_10_-/","Chapter_11/","Chapter_12_-/","Chapter_13/","Chapter_14/","Chapter_15/","Chapter_16/","Chapter_17/","Chapter_18/","Chapter_19/","Chapter_20/","Chapter_21/","Chapter_22/","Chapter_23/","Chapter_24/","Chapter_25/","Chapter_26/"];
+<script>
+    const hindiNames = ["1. बातचीत", "2. उसने कहा था", "3. संपूर्ण क्रांति", "4. अर्धनारीश्वर", "5. रोज", "6. एक लेख और एक पत्र", "7. ओ सदानीरा", "8. सिपाही की माँ", "9. प्रगीत और समाज", "10. जूठन", "11. हंसते हुए मेरा अकेलापन", "12. तिरिछ", "13. शिक्षा", "14. कड़बक", "15. पद (सूरदास)", "16. पद (Tulsidas)", "17. छप्पय", "18. कवित्त", "19. तुमुल कोलाहल कलह में", "20. पुत्र वियोग", "21. उषा", "22. जन-जन का चेहरा एक", "23. अधिनायक", "24. प्यारे नन्हे बेटे को", "25. हार-जीत", "26. गाँव का घर"];
+    const links = ["Chapter_1_-/", "Chapter_2_-/", "Chapter_3_-/", "Chapter_4_-/", "Chapter_5_-/", "Chapter_6_-/", "Chapter_7_-/", "Chapter_8_-/", "Chapter_9_-/", "Chapter_10_-/", "Chapter_11/", "Chapter_12_-/", "Chapter_13/", "Chapter_14/", "Chapter_15/", "Chapter_16/", "Chapter_17/", "Chapter_18/", "Chapter_19/", "Chapter_20/", "Chapter_21/", "Chapter_22/", "Chapter_23/", "Chapter_24/", "Chapter_25/", "Chapter_26/"];
 
-        function accessSite() {
-            const n = document.getElementById('name').value;
-            const c = document.getElementById('userClass').value;
-            if(n && c) {
-                document.getElementById('signup-overlay').style.display = 'none';
-                document.getElementById('mainBody').style.display = 'block';
-                document.getElementById('userBadge').innerText = n;
-            } else { alert("Please enter your Name and select your Class"); }
-        }
+    function accessSite() {
+        const e = document.getElementById("name").value,
+            t = document.getElementById("userClass").value;
+        if (e && t) {
+            document.getElementById("signup-overlay").style.display = "none";
+            document.getElementById("mainBody").style.display = "block";
+            document.getElementById("userBadge").innerText = e;
+        } else alert("Details bhariye");
+    }
 
-        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
 
-        function createLink(text, url) {
-            return `<div class="subject-link" onclick="window.open('${url}')">${text} <span>➔</span></div>`;
-        }
+    function openSection(e) {
+        document.getElementById("modalTitle").innerText = e;
+        let t = `<div class="subject-link objective-btn" onclick="alert('${e} Objectives Loading...')">🎯 Objective Questions</div>
+                 <div class="section-title">CHAPTER WISE NOTES</div>
+                 <div class="subject-link">Important Subjective <span>→</span></div>
+                 <div class="subject-link">Model Set Practice <span>→</span></div>`;
+        document.getElementById("modalContent").innerHTML = t;
+        document.getElementById("modal").style.display = "block";
+    }
 
-        function openSection(subject) {
-            document.getElementById('modalTitle').innerText = subject;
-            let html = `
-                <div class="subject-link objective-btn" onclick="alert('${subject} Objective Section Loading...')">
-                    🎯 Objective Questions
-                </div>
-                <div class="section-title">OTHER MATERIALS</div>
-                <div class="subject-link">Subjective Notes <span>→</span></div>
-                <div class="subject-link">Important Diagrams <span>→</span></div>
-            `;
-            document.getElementById('modalContent').innerHTML = html;
-            document.getElementById('modal').style.display = 'block';
-        }
+    function openHindi() {
+        document.getElementById("modalTitle").innerText = "12th Hindi (Digant)";
+        let e = '<div class="subject-link objective-btn" onclick="alert(\'All Objectives Loading...\')">🎯 Hindi Full Objective</div><div class="section-title">CHAPTER LIST</div>';
+        hindiNames.forEach((t, n) => {
+            e += `<div class="subject-link" onclick="window.open('https://adityaanshamm-wq.github.io/Class_12th_Hindi_${links[n]}')">${t} <span style="font-size:11px;color:var(--primary)">READ ➔</span></div>`
+        });
+        document.getElementById("modalContent").innerHTML = e;
+        document.getElementById("modal").style.display = "block";
+    }
 
-        function openHindi() {
-            document.getElementById('modalTitle').innerText = "Class 12th Hindi Chapters";
-            let html = `
-                <div class="subject-link objective-btn" onclick="alert('Hindi All Chapters Objective Loading...')">
-                    🎯 Hindi Full Objective
-                </div>
-                <div class="section-title">CHAPTER WISE LIST</div>
-            `;
-            hindiNames.forEach((n, i) => {
-                html += `<div class="subject-link" onclick="window.open('https://adityaanshamm-wq.github.io/Class_12th_Hindi_${links[i]}')">${n} <span style="font-size:11px; color:var(--primary)">READ ➔</span></div>`;
-            });
-            document.getElementById('modalContent').innerHTML = html;
-            document.getElementById('modal').style.display = 'block';
-        }
+    function openModelPaper() {
+        document.getElementById("modalTitle").innerText = "Model Papers 2026";
+        let html = `
+            <div class="section-title">CLASS 10th</div>
+            <div class="subject-link">Mathematics <span>→</span></div>
+            <div class="subject-link">Science <span>→</span></div>
+            <div class="subject-link">Social Science <span>→</span></div>
+            <div class="subject-link">Hindi <span>→</span></div>
+            <div class="subject-link">Sanskrit <span>→</span></div>
+            <div class="subject-link">English <span>→</span></div>
+            
+            <div class="section-title">12th SCIENCE</div>
+            <div class="subject-link">Physics <span>→</span></div>
+            <div class="subject-link">Chemistry <span>→</span></div>
+            <div class="subject-link">Biology <span>→</span></div>
+            <div class="subject-link">Mathematics <span>→</span></div>
+            <div class="subject-link">Hindi <span>→</span></div>
+            <div class="subject-link">English <span>→</span></div>
 
-        function openModelPaper() {
-            document.getElementById('modalTitle').innerText = "Model Papers 2026 (All Subjects)";
-            let html = `
-                <div class="section-title">CLASS 10th</div>
-                ${createLink("Maths", "#")}${createLink("Science", "#")}${createLink("Social Science", "#")}${createLink("Hindi", "#")}${createLink("Sanskrit", "#")}${createLink("English", "#")}
-                <div class="section-title">12th SCIENCE</div>
-                ${createLink("Physics", "#")}${createLink("Chemistry", "#")}${createLink("Mathematics", "#")}${createLink("Biology", "#")}${createLink("Hindi", "#")}${createLink("English", "#")}
-                <div class="section-title">12th ARTS</div>
-                ${createLink("History", "#")}${createLink("Geography", "#")}${createLink("Pol Science", "#")}${createLink("Psychology", "#")}${createLink("Hindi", "#")}${createLink("English", "#")}
-                <div class="section-title">12th COMMERCE</div>
-                ${createLink("Accountancy", "#")}${createLink("Business Studies", "#")}${createLink("Economics", "#")}${createLink("Entrepreneurship", "#")}${createLink("Hindi", "#")}${createLink("English", "#")}
-            `;
-            document.getElementById('modalContent').innerHTML = html;
-            document.getElementById('modal').style.display = 'block';
-        }
+            <div class="section-title">12th ARTS</div>
+            <div class="subject-link">History <span>→</span></div>
+            <div class="subject-link">Geography <span>→</span></div>
+            <div class="subject-link">Political Science <span>→</span></div>
+            <div class="subject-link">Psychology <span>→</span></div>
+            <div class="subject-link">Hindi <span>→</span></div>
+            <div class="subject-link">English <span>→</span></div>
 
-        function openPYQ() {
-            document.getElementById('modalTitle').innerText = "PYQ (Previous Year Questions)";
-            let html = `
-                <div class="section-title">CLASS 10th PYQ</div>
-                ${createLink("Maths PYQ", "#")}${createLink("Science PYQ", "#")}${createLink("Social Science PYQ", "#")}${createLink("Hindi/English PYQ", "#")}
-                <div class="section-title">12th SCIENCE PYQ</div>
-                ${createLink("Physics PYQ", "#")}${createLink("Chemistry PYQ", "#")}${createLink("Maths PYQ", "#")}${createLink("Biology PYQ", "#")}
-                <div class="section-title">12th ARTS PYQ</div>
-                ${createLink("History PYQ", "#")}${createLink("Geography PYQ", "#")}${createLink("Pol Science PYQ", "#")}
-                <div class="section-title">12th COMMERCE PYQ</div>
-                ${createLink("Accountancy PYQ", "#")}${createLink("Business Studies PYQ", "#")}${createLink("Economics PYQ", "#")}
-            `;
-            document.getElementById('modalContent').innerHTML = html;
-            document.getElementById('modal').style.display = 'block';
-        }
-    </script>
+            <div class="section-title">12th COMMERCE</div>
+            <div class="subject-link">Accountancy <span>→</span></div>
+            <div class="subject-link">Business Studies <span>→</span></div>
+            <div class="subject-link">Economics <span>→</span></div>
+            <div class="subject-link">Entrepreneurship <span>→</span></div>
+            <div class="subject-link">Hindi <span>→</span></div>
+            <div class="subject-link">English <span>→</span></div>
+        `;
+        document.getElementById("modalContent").innerHTML = html;
+        document.getElementById("modal").style.display = "block";
+    }
+
+    function openPYQ() {
+        document.getElementById("modalTitle").innerText = "Question Bank (PYQ)";
+        let html = `
+            <div class="section-title">CLASS 10th</div>
+            <div class="subject-link">Mathematics <span>→</span></div>
+            <div class="subject-link">Science <span>→</span></div>
+            <div class="subject-link">Social Science <span>→</span></div>
+            <div class="subject-link">Hindi <span>→</span></div>
+            <div class="subject-link">Sanskrit <span>→</span></div>
+            <div class="subject-link">English <span>→</span></div>
+            
+            <div class="section-title">12th SCIENCE</div>
+            <div class="subject-link">Physics <span>→</span></div>
+            <div class="subject-link">Chemistry <span>→</span></div>
+            <div class="subject-link">Biology <span>→</span></div>
+            <div class="subject-link">Mathematics <span>→</span></div>
+            <div class="subject-link">Hindi <span>→</span></div>
+            <div class="subject-link">English <span>→</span></div>
+
+            <div class="section-title">12th ARTS</div>
+            <div class="subject-link">History <span>→</span></div>
+            <div class="subject-link">Geography <span>→</span></div>
+            <div class="subject-link">Political Science <span>→</span></div>
+            <div class="subject-link">Psychology <span>→</span></div>
+            <div class="subject-link">Hindi <span>→</span></div>
+            <div class="subject-link">English <span>→</span></div>
+
+            <div class="section-title">12th COMMERCE</div>
+            <div class="subject-link">Accountancy <span>→</span></div>
+            <div class="subject-link">Business Studies <span>→</span></div>
+            <div class="subject-link">Economics <span>→</span></div>
+            <div class="subject-link">Entrepreneurship <span>→</span></div>
+            <div class="subject-link">Hindi <span>→</span></div>
+            <div class="subject-link">English <span>→</span></div>
+        `;
+        document.getElementById("modalContent").innerHTML = html;
+        document.getElementById("modal").style.display = "block";
+    }
+</script>
 </body>
 </html>
+
