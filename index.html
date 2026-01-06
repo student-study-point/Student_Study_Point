@@ -301,7 +301,7 @@
         <div class="stream-card" style="border-top:4px solid var(--science)">
             <div class="card-h" style="color:var(--science)">🧪 12th Science</div>
             <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
-            <div class="subject-link" onclick="openSection('English (Rainbow)')">English (Rainbow) <span>→</span></div>
+            <div class="subject-link" onclick="openEnglish()">English (Rainbow) <span>→</span></div>
             <div class="subject-link" onclick="openSection('Physics')">Physics <span>→</span></div>
             <div class="subject-link" onclick="openSection('Chemistry')">Chemistry <span>→</span></div>
             <div class="subject-link" onclick="openSection('Biology')">Biology <span>→</span></div>
@@ -311,7 +311,7 @@
         <div class="stream-card" style="border-top:4px solid var(--arts)">
             <div class="card-h" style="color:var(--arts)">🎨 12th Arts</div>
             <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
-            <div class="subject-link" onclick="openSection('English (Rainbow)')">English (Rainbow) <span>→</span></div>
+            <div class="subject-link" onclick="openEnglish()">English (Rainbow) <span>→</span></div>
             <div class="subject-link" onclick="openSection('History')">History <span>→</span></div>
             <div class="subject-link" onclick="openSection('Geography')">Geography <span>→</span></div>
             <div class="subject-link" onclick="openSection('Political Science')">Political Science <span>→</span></div>
@@ -321,7 +321,7 @@
         <div class="stream-card" style="border-top:4px solid var(--commerce)">
             <div class="card-h" style="color:var(--commerce)">💼 12th Commerce</div>
             <div class="subject-link" onclick="openHindi()">Hindi (Digant) <span>→</span></div>
-            <div class="subject-link" onclick="openSection('English (Rainbow)')">English (Rainbow) <span>→</span></div>
+            <div class="subject-link" onclick="openEnglish()">English (Rainbow) <span>→</span></div>
             <div class="subject-link" onclick="openSection('Accountancy')">Accountancy <span>→</span></div>
             <div class="subject-link" onclick="openSection('Business Studies')">Business Studies <span>→</span></div>
             <div class="subject-link" onclick="openSection('Economics')">Economics <span>→</span></div>
@@ -346,8 +346,59 @@
 </div>
 
 <script>
+    // Variables to track state
+    let activeSubject = null;
+
+    // Hindi Data
     const hindiNames = ["1. बातचीत", "2. उसने कहा था", "3. संपूर्ण क्रांति", "4. अर्धनारीश्वर", "5. रोज", "6. एक लेख और एक पत्र", "7. ओ सदानीरा", "8. सिपाही की माँ", "9. प्रगीत और समाज", "10. जूठन", "11. हंसते हुए मेरा अकेलापन", "12. तिरिछ", "13. शिक्षा", "14. कड़बक", "15. पद (सूरदास)", "16. पद (Tulsidas)", "17. छप्पय", "18. कवित्त", "19. तुमुल कोलाहल कलह में", "20. पुत्र वियोग", "21. उषा", "22. जन-जन का चेहरा एक", "23. अधिनायक", "24. प्यारे नन्हे बेटे को", "25. हार-जीत", "26. गाँव का घर"];
     const links = ["Chapter_1_-/", "Chapter_2_-/", "Chapter_3_-/", "Chapter_4_-/", "Chapter_5_-/", "Chapter_6_-/", "Chapter_7_-/", "Chapter_8_-/", "Chapter_9_-/", "Chapter_10_-/", "Chapter_11/", "Chapter_12_-/", "Chapter_13/", "Chapter_14/", "Chapter_15/", "Chapter_16/", "Chapter_17/", "Chapter_18/", "Chapter_19/", "Chapter_20/", "Chapter_21/", "Chapter_22/", "Chapter_23/", "Chapter_24/", "Chapter_25/", "Chapter_26/"];
+
+    // English Data
+    const englishNames = [
+        "1. Indian Civilization and Culture", 
+        "2. Bharat is My Home", 
+        "3. A Pinch of Snuff", 
+        "4. I Have a Dream", 
+        "5. Ideas That Have Helped Mankind", 
+        "6. The Artist", 
+        "8. How Free is the Press", 
+        "9. The Earth", 
+        "10. India Through a Traveller's Eyes", 
+        "11. A Marriage Proposal", 
+        "12. Sweetest Love I Do Not Goe", 
+        "13. Song of Myself", 
+        "14. Now the Leaves are Falling Fast", 
+        "15. Ode to Autumn", 
+        "16. An Epitaph", 
+        "17. The Soldier", 
+        "18. Macavity: The Mystery Cat", 
+        "19. Fire-Hymn", 
+        "20. Snake", 
+        "21. My Grandmother's House"
+    ];
+
+    const englishLinks = [
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_1/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_2/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_3/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_4/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_5/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_6/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_8/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_9/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_10/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_11/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_12/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_13/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_14/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_15/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_16/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_17/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_18/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_19/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_20/",
+        "https://adityaanshamm-wq.github.io/Class_12th_English_Chapter_21/"
+    ];
 
     window.onload = function() {
         const savedName = localStorage.getItem("adityaUserName");
@@ -362,9 +413,13 @@
     window.addEventListener('popstate', function() {
         const modal = document.getElementById("modal");
         if (modal.style.display === "block") {
-            // Agar iframe khula hai toh wapas list par bhejein, warna modal band karein
+            // Agar iframe khula hai toh wapas list par bhejein
             if(document.getElementById("chapterFrame")) {
-                openHindi(); 
+                if (activeSubject === 'english') {
+                    openEnglish();
+                } else {
+                    openHindi(); 
+                }
             } else {
                 modal.style.display = "none";
             }
@@ -402,13 +457,12 @@
         }
     }
 
-    // Naya Function: Iframe load karne ke liye
     function loadChapter(url, title) {
         document.getElementById("modalTitle").innerText = title;
         let iframeHtml = `
             <iframe id="chapterFrame" src="${url}" class="reader-container"></iframe>
         `;
-        document.getElementById("modalContent").style.padding = "0"; // Iframe ke liye padding 0
+        document.getElementById("modalContent").style.padding = "0"; 
         document.getElementById("modalContent").innerHTML = iframeHtml;
         history.pushState({viewingChapter: true}, "");
     }
@@ -425,12 +479,26 @@
     }
 
     function openHindi() {
+        activeSubject = 'hindi';
         document.getElementById("modalTitle").innerText = "12th Hindi (Digant)";
         document.getElementById("modalContent").style.padding = "20px";
         let e = '<div class="subject-link objective-btn" onclick="alert(\'All Objectives Loading...\')">🎯 Hindi Full Objective</div><div class="section-title">CHAPTER LIST</div>';
         hindiNames.forEach((t, n) => {
             let fullUrl = `https://adityaanshamm-wq.github.io/Class_12th_Hindi_${links[n]}`;
             e += `<div class="subject-link" onclick="loadChapter('${fullUrl}', '${t}')">${t} <span style="font-size:11px;color:var(--primary)">READ ➔</span></div>`
+        });
+        document.getElementById("modalContent").innerHTML = e;
+        openModalLogic();
+    }
+
+    function openEnglish() {
+        activeSubject = 'english';
+        document.getElementById("modalTitle").innerText = "12th English (Rainbow)";
+        document.getElementById("modalContent").style.padding = "20px";
+        let e = '<div class="subject-link objective-btn" onclick="alert(\'English Objectives Loading...\')">🎯 English Full Objective</div><div class="section-title">CHAPTER LIST</div>';
+        englishNames.forEach((name, index) => {
+            let url = englishLinks[index];
+            e += `<div class="subject-link" onclick="loadChapter('${url}', '${name}')">${name} <span style="font-size:11px;color:var(--primary)">READ ➔</span></div>`
         });
         document.getElementById("modalContent").innerHTML = e;
         openModalLogic();
@@ -447,10 +515,4 @@
     function openPYQ() {
         document.getElementById("modalTitle").innerText = "Question Bank (PYQ)";
         document.getElementById("modalContent").style.padding = "20px";
-        let html = `<div class="section-title">COMING SOON...</div>`;
-        document.getElementById("modalContent").innerHTML = html;
-        openModalLogic();
-    }
-</script>
-</body>
-</html>
+     
