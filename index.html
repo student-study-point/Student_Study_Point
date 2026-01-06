@@ -21,6 +21,7 @@
             margin: 0;
             background: var(--bg);
             color: #1e293b;
+            overflow-x: hidden;
         }
 
         #signup-overlay {
@@ -184,15 +185,29 @@
             height: 100%;
             background: #fff;
             z-index: 10000;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
         .modal-inner {
             background: #fff;
             width: 100%;
             height: 100%;
-            padding: 25px;
-            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        #modalContent {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
         }
 
         .section-title {
@@ -229,6 +244,13 @@
             font-weight: 700;
             color: #fff;
             text-decoration: none;
+        }
+
+        /* Iframe Container */
+        .reader-container {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -315,11 +337,10 @@
 
 <div id="modal" class="modal">
     <div class="modal-inner">
-        <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="modal-header">
             <h3 id="modalTitle" style="margin:0;color:var(--primary)">Title</h3>
             <button onclick="closeModal()" style="border:none;background:#fee2e2;color:#ef4444;border-radius:8px;padding:8px 15px;cursor:pointer;font-weight:700">Close ✕</button>
         </div>
-        <hr style="opacity:.1;margin:15px 0">
         <div id="modalContent"></div>
     </div>
 </div>
@@ -338,11 +359,15 @@
         }
     }
 
-    // Phone back button logic
     window.addEventListener('popstate', function() {
         const modal = document.getElementById("modal");
         if (modal.style.display === "block") {
-            modal.style.display = "none";
+            // Agar iframe khula hai toh wapas list par bhejein, warna modal band karein
+            if(document.getElementById("chapterFrame")) {
+                openHindi(); 
+            } else {
+                modal.style.display = "none";
+            }
         }
     });
 
@@ -366,23 +391,31 @@
 
     function openModalLogic() {
         document.getElementById("modal").style.display = "block";
-        // Push a state so back button works for modal
         history.pushState({modalOpen: true}, "");
     }
 
     function closeModal() {
         const modal = document.getElementById("modal");
-        if(modal.style.display === "block") {
-            modal.style.display = "none";
-            // If user clicked close button, we need to go back in history to clear the state
-            if(history.state && history.state.modalOpen) {
-                history.back();
-            }
+        modal.style.display = "none";
+        if(history.state && history.state.modalOpen) {
+            history.back();
         }
+    }
+
+    // Naya Function: Iframe load karne ke liye
+    function loadChapter(url, title) {
+        document.getElementById("modalTitle").innerText = title;
+        let iframeHtml = `
+            <iframe id="chapterFrame" src="${url}" class="reader-container"></iframe>
+        `;
+        document.getElementById("modalContent").style.padding = "0"; // Iframe ke liye padding 0
+        document.getElementById("modalContent").innerHTML = iframeHtml;
+        history.pushState({viewingChapter: true}, "");
     }
 
     function openSection(e) {
         document.getElementById("modalTitle").innerText = e;
+        document.getElementById("modalContent").style.padding = "20px";
         let t = `<div class="subject-link objective-btn" onclick="alert('${e} Objectives Loading...')">🎯 Objective Questions</div>
                  <div class="section-title">CHAPTER WISE NOTES</div>
                  <div class="subject-link">Important Subjective <span>→</span></div>
@@ -393,9 +426,11 @@
 
     function openHindi() {
         document.getElementById("modalTitle").innerText = "12th Hindi (Digant)";
+        document.getElementById("modalContent").style.padding = "20px";
         let e = '<div class="subject-link objective-btn" onclick="alert(\'All Objectives Loading...\')">🎯 Hindi Full Objective</div><div class="section-title">CHAPTER LIST</div>';
         hindiNames.forEach((t, n) => {
-            e += `<div class="subject-link" onclick="window.open('https://adityaanshamm-wq.github.io/Class_12th_Hindi_${links[n]}')">${t} <span style="font-size:11px;color:var(--primary)">READ ➔</span></div>`
+            let fullUrl = `https://adityaanshamm-wq.github.io/Class_12th_Hindi_${links[n]}`;
+            e += `<div class="subject-link" onclick="loadChapter('${fullUrl}', '${t}')">${t} <span style="font-size:11px;color:var(--primary)">READ ➔</span></div>`
         });
         document.getElementById("modalContent").innerHTML = e;
         openModalLogic();
@@ -403,76 +438,19 @@
 
     function openModelPaper() {
         document.getElementById("modalTitle").innerText = "Model Papers 2026";
-        let html = `
-            <div class="section-title">CLASS 10th</div>
-            <div class="subject-link">Mathematics <span>→</span></div>
-            <div class="subject-link">Science <span>→</span></div>
-            <div class="subject-link">Social Science <span>→</span></div>
-            <div class="subject-link">Hindi <span>→</span></div>
-            <div class="subject-link">Sanskrit <span>→</span></div>
-            <div class="subject-link">English <span>→</span></div>
-            <div class="section-title">12th SCIENCE</div>
-            <div class="subject-link">Physics <span>→</span></div>
-            <div class="subject-link">Chemistry <span>→</span></div>
-            <div class="subject-link">Biology <span>→</span></div>
-            <div class="subject-link">Mathematics <span>→</span></div>
-            <div class="subject-link">Hindi <span>→</span></div>
-            <div class="subject-link">English <span>→</span></div>
-            <div class="section-title">12th ARTS</div>
-            <div class="subject-link">History <span>→</span></div>
-            <div class="subject-link">Geography <span>→</span></div>
-            <div class="subject-link">Political Science <span>→</span></div>
-            <div class="subject-link">Psychology <span>→</span></div>
-            <div class="subject-link">Hindi <span>→</span></div>
-            <div class="subject-link">English <span>→</span></div>
-            <div class="section-title">12th COMMERCE</div>
-            <div class="subject-link">Accountancy <span>→</span></div>
-            <div class="subject-link">Business Studies <span>→</span></div>
-            <div class="subject-link">Economics <span>→</span></div>
-            <div class="subject-link">Entrepreneurship <span>→</span></div>
-            <div class="subject-link">Hindi <span>→</span></div>
-            <div class="subject-link">English <span>→</span></div>
-        `;
+        document.getElementById("modalContent").style.padding = "20px";
+        let html = `<div class="section-title">COMING SOON...</div>`;
         document.getElementById("modalContent").innerHTML = html;
         openModalLogic();
     }
 
     function openPYQ() {
         document.getElementById("modalTitle").innerText = "Question Bank (PYQ)";
-        let html = `
-            <div class="section-title">CLASS 10th</div>
-            <div class="subject-link">Mathematics <span>→</span></div>
-            <div class="subject-link">Science <span>→</span></div>
-            <div class="subject-link">Social Science <span>→</span></div>
-            <div class="subject-link">Hindi <span>→</span></div>
-            <div class="subject-link">Sanskrit <span>→</span></div>
-            <div class="subject-link">English <span>→</span></div>
-            <div class="section-title">12th SCIENCE</div>
-            <div class="subject-link">Physics <span>→</span></div>
-            <div class="subject-link">Chemistry <span>→</span></div>
-            <div class="subject-link">Biology <span>→</span></div>
-            <div class="subject-link">Mathematics <span>→</span></div>
-            <div class="subject-link">Hindi <span>→</span></div>
-            <div class="subject-link">English <span>→</span></div>
-            <div class="section-title">12th ARTS</div>
-            <div class="subject-link">History <span>→</span></div>
-            <div class="subject-link">Geography <span>→</span></div>
-            <div class="subject-link">Political Science <span>→</span></div>
-            <div class="subject-link">Psychology <span>→</span></div>
-            <div class="subject-link">Hindi <span>→</span></div>
-            <div class="subject-link">English <span>→</span></div>
-            <div class="section-title">12th COMMERCE</div>
-            <div class="subject-link">Accountancy <span>→</span></div>
-            <div class="subject-link">Business Studies <span>→</span></div>
-            <div class="subject-link">Economics <span>→</span></div>
-            <div class="subject-link">Entrepreneurship <span>→</span></div>
-            <div class="subject-link">Hindi <span>→</span></div>
-            <div class="subject-link">English <span>→</span></div>
-        `;
+        document.getElementById("modalContent").style.padding = "20px";
+        let html = `<div class="section-title">COMING SOON...</div>`;
         document.getElementById("modalContent").innerHTML = html;
         openModalLogic();
     }
 </script>
 </body>
 </html>
-
